@@ -1,0 +1,13 @@
+HloModule SyncTensorsGraph.21
+
+ENTRY %SyncTensorsGraph.21 (p0.6: f32[20,30], p1.13: f32[20,30], p2.15: f32[30,30], p3.16: f32[20,30]) -> (f32[20,30]) {
+  %p3.16 = f32[20,30]{1,0} parameter(3), frontend_attributes={neff_input_names="input3"}, metadata={op_type="xla__device_data" op_name="xla__device_data"}
+  %p2.15 = f32[30,30]{1,0} parameter(2), frontend_attributes={neff_input_names="input2"}, metadata={op_type="xla__device_data" op_name="xla__device_data"}
+  %dot.17 = f32[20,30]{1,0} dot(f32[20,30]{1,0} %p3.16, f32[30,30]{1,0} %p2.15), lhs_contracting_dims={1}, rhs_contracting_dims={0}, metadata={op_type="aten__mm" op_name="aten__mm"}
+  %p1.13 = f32[20,30]{1,0} parameter(1), frontend_attributes={neff_input_names="input1"}, metadata={op_type="xla__device_data" op_name="xla__device_data"}
+  %subtract.18 = f32[20,30]{1,0} subtract(f32[20,30]{1,0} %dot.17, f32[20,30]{1,0} %p1.13), metadata={op_type="aten__sub" op_name="aten__sub"}
+  %p0.6 = f32[20,30]{1,0} parameter(0), frontend_attributes={neff_input_names="input0"}, metadata={op_type="xla__device_data" op_name="xla__device_data"}
+  %add.19 = f32[20,30]{1,0} add(f32[20,30]{1,0} %subtract.18, f32[20,30]{1,0} %p0.6), metadata={op_type="aten__add" op_name="aten__add"}
+  ROOT %tuple.20 = (f32[20,30]{1,0}) tuple(f32[20,30]{1,0} %add.19), frontend_attributes={neff_output_names="output0"}
+}
+
