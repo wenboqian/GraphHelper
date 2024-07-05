@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                echo "doing build stuff.."
+                echo "jenkins pipeline python version: $(python -V)"
                 '''
             }
         }
