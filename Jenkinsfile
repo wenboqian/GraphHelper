@@ -30,11 +30,12 @@ pipeline {
             failure {
                 script {
                     emailext(
-                    subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - FAILURE",
-                    body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed because wrong branch commit</p>""",
-                    mimeType: 'text/html',
-                    to: "${env.RECIPIENTS}"
-                )
+                        subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - FAILURE",
+                        body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed because wrong branch commit</p>""",
+                        mimeType: 'text/html',
+                        to: "${env.RECIPIENTS}"
+                    )
+                }
             }
         }
         stage('Build') {
