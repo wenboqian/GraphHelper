@@ -26,18 +26,6 @@ pipeline {
                 }
             }
         }
-        post {
-            failure {
-                script {
-                    emailext(
-                        subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - FAILURE",
-                        body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed because wrong branch commit</p>""",
-                        mimeType: 'text/html',
-                        to: "${env.RECIPIENTS}"
-                    )
-                }
-            }
-        }
         stage('Build') {
             steps {
                 echo "Building.."
@@ -60,6 +48,20 @@ pipeline {
                 sh '''
                 echo "doing delivery stuff.."
                 '''
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                emailext(
+                    subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - FAILURE",
+                    body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed.</p>
+                             <p>Reason: ${env.FAILURE_REASON}</p>""",
+                    mimeType: 'text/html',
+                    to: "${env.RECIPIENTS}"
+                )
             }
         }
     }
