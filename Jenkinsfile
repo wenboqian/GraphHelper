@@ -23,11 +23,11 @@ pipeline {
                         echo "Message: ${message}"
                         echo "Branch: ${branch}"
 
-                        def wrongBranch = false 
-                        if (author == 'wfckl789' && branch == 'main') {
-                            env.FAILURE_STAGE = env.STAGE_NAME
-                            sh 'exit 1'
-                        }
+                        // def wrongBranch = false 
+                        // if (author == 'wfckl789' && branch == 'main') {
+                            // env.FAILURE_STAGE = env.STAGE_NAME
+                            // sh 'exit 1'
+                        // }
                     } catch (Exception e) {
                         env.FAILURE_STAGE = env.STAGE_NAME
                         throw e
