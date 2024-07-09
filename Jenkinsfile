@@ -13,7 +13,7 @@ pipeline {
                 script {
                     def author = sh(script: "git log -1 --pretty=format:'%an'", returnStdout: true).trim()
                     def message = sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
-                    def branch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    def branch = env.GIT_BRANCH
 
                     echo "Author: ${author}"
                     echo "Message: ${message}"
