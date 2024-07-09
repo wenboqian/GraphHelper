@@ -14,19 +14,25 @@ pipeline {
         stage('Get Commit Info') {
             steps {
                 script {
-                    def author = sh(script: "git log -1 --pretty=format:'%an'", returnStdout: true).trim()
-                    def message = sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
-                    def branch = env.GIT_BRANCH
+                    try {
+                        def author = sh(script: "git log -1 --pretty=format:'%an'", returnStdout: true).trim()
+                        def message = sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
+                        def branch = env.GIT_BRANCH
 
-                    echo "Author: ${author}"
-                    echo "Message: ${message}"
-                    echo "Branch: ${branch}"
+                        echo "Author: ${author}"
+                        echo "Message: ${message}"
+                        echo "Branch: ${branch}"
 
-                    def wrongBranch = false 
-                    if (author == 'wfckl789' && branch == 'main') {
+                        def wrongBranch = false 
+                        if (author == 'wfckl789' && branch == 'main') {
+                            env.FAILURE_STAGE = env.STAGE_NAME
+                            sh 'exit 1'
+                        }
+                    } catch (Exception e) {
                         env.FAILURE_STAGE = env.STAGE_NAME
-                        sh 'exit 1'
+                        throw e
                     }
+                    
                 }
             }
         }
