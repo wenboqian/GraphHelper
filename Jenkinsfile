@@ -7,6 +7,9 @@ pipeline {
     triggers {
         pollSCM '*/5 * * * *'
     }
+    environment {
+        FAILURE_STAGE = ''
+    }
     stages {
         stage('Get Commit Info') {
             steps {
@@ -21,7 +24,8 @@ pipeline {
 
                     def wrongBranch = false 
                     if (author == 'wfckl789' && branch == 'main') {
-                        error("${author} shouldn't commit to brach: ${branch}!")
+                        env.FAILURE_STAGE = env.STAGE_NAME
+                        sh 'exit 1'
                     }
                 }
             }
@@ -58,7 +62,7 @@ pipeline {
                 emailext(
                     subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) - FAILURE",
                     body: """<p>Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL}) failed.</p>
-                             <p>Reason: ${env.FAILURE_REASON}</p>""",
+                            <p>Failed Stage: ${env.FAILURE_STAGE}</p>""",
                     mimeType: 'text/html',
                     to: "${env.RECIPIENTS}"
                 )
