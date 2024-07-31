@@ -6,8 +6,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## How to start
 
-trigger jenkins test
-
 In the project directory, you can run:
 
 1. ### `npm install`
