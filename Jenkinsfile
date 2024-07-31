@@ -19,7 +19,6 @@ pipeline {
                         def message = sh(script: "git log -1 --pretty=format:'%s'", returnStdout: true).trim()
                         def branch = env.GIT_BRANCH
 
-                        echo "test"
                         echo "Author: ${author}"
                         echo "Message: ${message}"
                         echo "Branch: ${branch}"
