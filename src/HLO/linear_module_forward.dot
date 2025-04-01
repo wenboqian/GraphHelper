@@ -1,0 +1,34 @@
+digraph HloModule {
+	"p0.1" [label="p0.1 \n f32[1,4]"];
+	"p1.2" [label="p1.2 \n f32[1]"];
+	"p2.3" [label="p2.3 \n f32[4]"];
+	"reshape.4" [label="reshape.4 \n f32[1,4]"];
+	"reshape.2" [label="reshape.2 \n f32[4]"];
+	"reshape.25" [label="reshape.25 \n f32[1]"];
+	"add.26" [label="add.26 \n f32[1]"];
+	"p3.27" [label="p3.27 \n f32[] parameter(3), frontend_attributes="];
+	"reshape.8" [label="reshape.8 \n f32[1]"];
+	"multiply.29" [label="multiply.29 \n f32[1]"];
+	"tuple.30" [label="tuple.30 \n (f32[1,4]"]; 
+ 	"p2.3" -> "reshape.4";
+	"p0.1" -> "custom-call.2";
+	"custom-call.2" -> "reshape.2";
+	"p2.3" -> "multiply";
+	"reshape.2" -> "multiply";
+	"multiply" -> "reduce";
+	"constant" -> "reduce";
+	"scalar_add_computation" -> "reduce";
+	"reduce" -> "reshape.25";
+	"p1.2" -> "custom-call.3";
+	"reshape.25" -> "add.26";
+	"custom-call.3" -> "add.26";
+	"p3.27" -> "reshape.8";
+	"add.26" -> "multiply.29";
+	"reshape.8" -> "multiply.29";
+	"p0.1" -> "tuple.30";
+	"p1.2" -> "tuple.30";
+	"p2.3" -> "tuple.30";
+	"reshape.4" -> "tuple.30";
+	"add.26" -> "tuple.30";
+	"multiply.29" -> "tuple.30";
+}

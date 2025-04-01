@@ -1,0 +1,19 @@
+digraph HloModule { 
+	"p0.1" [label="p0.1 \n f32[4096,64,4]"];
+	"p8.9" [label="p8.9 \n f32[4096]"];
+	"reshape.66" [label="reshape.66 \n f32[4096,256]"];
+	"p9.10" [label="p9.10 \n f32[4096,384]"];
+	"dot.67" [label="dot.67 \n f32[256,384]"];
+	"slice.68" [label="slice.68 \n f32[256,128]"];
+	"reshape.71" [label="reshape.71 \n f32[64,4,1,128]"]; 
+ 	"p8.9" -> "custom-call.57";
+	"p0.1" -> "custom-call.65";
+	"custom-call.57" -> "custom-call.65";
+	"constant.64" -> "custom-call.65";
+	"custom-call.65" -> "reshape.66";
+	"p9.10" -> "custom-call.58";
+	"reshape.66" -> "dot.67";
+	"custom-call.58" -> "dot.67";
+	"dot.67" -> "slice.68";
+	"slice.68" -> "reshape.71";
+ }
