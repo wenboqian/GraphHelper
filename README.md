@@ -20,7 +20,7 @@ To convert HLO text to an SVG or PNG file, follow these steps:
 
 3. **Output:**
 
-   The result will be a visual representation of the HLO graph, saved as an SVG or PNG.
+   The result will be a visual representation of the HLO graph in ```src/HLO/xxx.svg```, saved as an SVG or PNG. 
 
 ---
 
