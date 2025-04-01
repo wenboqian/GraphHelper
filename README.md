@@ -1,25 +1,30 @@
-# Getting Started with Graph Helper
+# Getting Started with HLO Graph Visualization
 
+To convert HLO text to an SVG or PNG file, follow these steps:
 
+1. **Modify the `src/HLO/HLO2PNG.js` file:**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [AntV](https://x6.antv.antgroup.com/)
+   - Import your HLO text file. For example:
+     ```js
+     import text from "./pbtxt/gpt2_tp=1_n_layer=1.js";
+     ```
 
-## How to start
+   - Specify the `dotFile` you want to generate. For example:
+     ```js
+     const dotFile = 'gpt2_tp=1_n_layer=1.dot';
+     ```
 
-In the project directory, you can run:
+2. **Run the conversion:**
 
-1. ### `npm install`
+   Once you have made the necessary changes, run the script to convert the HLO text to an SVG or PNG file.
 
-2. ### `npm run dev`
+3. **Output:**
 
-Runs the app in the development mode.
-Open [http://localhost:5173](http://localhost:5173/) to view it in your browser.
+   The result will be a visual representation of the HLO graph, saved as an SVG or PNG.
 
-The page will reload when you make changes.
-You may also see any lint errors in the console.
+---
 
-## For Graph Visualization
+### Notes:
+- Ensure that the file paths are correct.
+- This process requires the appropriate environment and dependencies for graph visualization.
 
-To change graph shown in **hlo graph visualization** tab, you should change variable `input` of `function pb2X6()` in `src/Data/pb2X6.js` file.
-
-You can change logic in `src/Data/pb2X6.js` to parse different text input.
